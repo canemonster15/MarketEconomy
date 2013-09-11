@@ -1,0 +1,14 @@
+-Commodity Exchange
+-Stock Market
+-Companies - Working on it.
+-Chest Shop
+-Banks
+	-Loans
+	-Intrest
+-Item Banks
+-Money Loss on death. - Done
+
+
+POSSIBLY:
+-Countries
+
