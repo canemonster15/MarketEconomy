@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -22,6 +23,11 @@ public class MarketEcoListener implements Listener{
 			double balance = plugin.players.getDouble(player.getName() + ".Balance");
 			player.sendMessage(plugin.prefix + "Account Balance: " + balance);
 		}
+	}
+	
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent e){
+		
 	}
 	
 }
