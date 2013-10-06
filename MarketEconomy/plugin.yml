@@ -1,3 +1,7 @@
 name: MarketEconomy
-version: 0.1
-author: canemonster15
+main: com.canemonster15.marketeconomy.MarketEconomy
+version: 0.0.1
+authors: [canemonster15, Mark_Laymon]
+
+commands:
+    

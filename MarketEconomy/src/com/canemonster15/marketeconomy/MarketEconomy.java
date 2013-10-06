@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -13,6 +15,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MarketEconomy extends JavaPlugin{
@@ -25,8 +28,13 @@ public class MarketEconomy extends JavaPlugin{
 	public FileConfiguration config;
 	public FileConfiguration players;
 	public FileConfiguration company;
-	public HashSet<String>  bids = new HashSet<String>();
-	public HashSet<String> offers = new HashSet<String>();
+	public PriorityQueue<String> bidname = new PriorityQueue<String>();
+	public PriorityQueue<Integer> bidamount = new PriorityQueue<Integer>();
+	public PriorityQueue<Double> bidprice = new PriorityQueue<Double>();
+	public PriorityQueue<String> offername = new PriorityQueue<String>();
+	public PriorityQueue<Integer> offeramount = new PriorityQueue<Integer>();
+	public PriorityQueue<Double> offerprice = new PriorityQueue<Double>();
+	
 
 	
 	public void onEnable(){
@@ -44,9 +52,9 @@ public class MarketEconomy extends JavaPlugin{
 		this.getConfig().options().copyDefaults(true);
 		this.getConfig().addDefault("Start Money", 100);
 		this.getCommand("pay").setExecutor(new MarketEcoPay());
-		this.getCommand("c").setExecutor(new MarketEcoCompany());
-		this.getCommand("company").setExecutor(new MarketEcoCompany());
 		this.getCommand("money").setExecutor(new MarketEcoMoney());
+		this.getCommand("bid").setExecutor(new MarketEcoBid());
+		this.getCommand("offer").setExecutor(new MarketEcoOffer());
 		playersFile = new File(getDataFolder(), "players.yml");
 		companyFile = new File(getDataFolder(), "companies.yml");
 		configFile = new File(getDataFolder(), "config.yml");
@@ -75,6 +83,8 @@ public class MarketEconomy extends JavaPlugin{
 			copy(getResource("config.yml"), configFile);
 		}
 	}
+	
+	
 	
 	public void copy(InputStream in, File file){
 		try{
@@ -124,7 +134,7 @@ public class MarketEconomy extends JavaPlugin{
 		saveYamls();
 	}
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){	
 		return false;
 	}
 }
